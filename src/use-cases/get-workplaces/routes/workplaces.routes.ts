@@ -22,7 +22,9 @@ class WorkplacesRoutes {
       res.status(400).json(error);
     });
 
-    await GetWorkplacesService.handle();
+    const { city, state } = query;
+
+    await GetWorkplacesService.handle(city, state);
 
     res.status(200).json({ ok: true });
   }
