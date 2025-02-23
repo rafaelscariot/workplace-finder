@@ -1,6 +1,6 @@
 require("dotenv").config();
 import express from "express";
-import WorkplacesRoutes from "./modules/workplaces/use-cases/get-workplaces/routes/workplaces.routes";
+import WorkplacesRoutes from "./use-cases/get-workplaces/routes/workplaces.routes";
 
 class App {
   public app: express.Application;

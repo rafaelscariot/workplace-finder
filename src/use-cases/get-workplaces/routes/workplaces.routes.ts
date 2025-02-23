@@ -1,4 +1,6 @@
 import { Router, Request, Response } from "express";
+import { validatesObjects } from "../../../utils/utils";
+import GetWorkplacesDto from "../dtos/get-workplace.dto";
 import GetWorkplacesService from "../services/get-workplaces.service";
 
 class WorkplacesRoutes {
@@ -14,8 +16,15 @@ class WorkplacesRoutes {
   }
 
   private async getWorkplaces(req: Request, res: Response) {
+    const { query } = req;
+
+    await validatesObjects(GetWorkplacesDto, query).catch((error) => {
+      res.status(400).json(error);
+    });
+
     await GetWorkplacesService.handle();
-    res.json({ ok: true });
+
+    res.status(200).json({ ok: true });
   }
 }
 

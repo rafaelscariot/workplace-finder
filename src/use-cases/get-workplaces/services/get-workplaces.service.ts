@@ -1,6 +1,6 @@
 class GetWorkplacesService {
   async handle() {
-    console.log("ok");
+    // console.log("ok");
   }
 }
 
