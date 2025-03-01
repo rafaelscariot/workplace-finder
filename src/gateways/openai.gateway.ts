@@ -5,14 +5,29 @@ class OpenAIGateway {
     apiKey: process.env.OPENAI_API_KEY,
   });
 
-  async getCompletion(content: string) {
-    const completion = this.openAI.chat.completions.create({
-      model: "gpt-4o-mini",
-      store: true,
-      messages: [{ role: "user", content }],
-    });
+  async getCompletion(content: []) {
+    try {
+      const completion = await this.openAI.chat.completions.create({
+        model: "gpt-4",
+        store: true,
+        messages: [
+          {
+            role: "user",
+            content: `Avalie neste array de varios estabelecimentos pesquisados 
+            na internet quais deles sao os que possuem infraestrutura para trabalhar 
+            la remotamente com laptop. Pela propriedade title e content de cada 
+            objeto do array voce pode avaliar. Array: ${JSON.stringify(
+              content
+            )}`,
+          },
+        ],
+      });
 
-    completion.then((result) => console.log(result.choices[0].message));
+      return completion.choices[0].message;
+    } catch (error) {
+      console.error("Error getting completion from OpenAI: ", error);
+      return null;
+    }
   }
 }
 

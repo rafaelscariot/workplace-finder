@@ -24,9 +24,7 @@ class WorkplacesRoutes {
 
     const { city, state } = query;
 
-    await GetWorkplacesService.handle(city, state);
-
-    res.status(200).json({ ok: true });
+    await GetWorkplacesService.handle(city, state, res);
   }
 }
 
